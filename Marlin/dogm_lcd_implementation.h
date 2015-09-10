@@ -460,12 +460,12 @@ static void lcd_implementation_quick_feedback()
 
 #if BEEPER > -1
     SET_OUTPUT(BEEPER);
-    for(int8_t i=0;i<10;i++)
+    for(int8_t i=0;i<2;i++)
     {
 		WRITE(BEEPER,HIGH);
-		delay(3);
+		delay(1);
 		WRITE(BEEPER,LOW);
-		delay(3);
+		delay(2);
     }
 #endif
 }
