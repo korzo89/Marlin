@@ -617,20 +617,20 @@ static void lcd_prepare_menu()
     #endif
 #endif
 	MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu);
+	MENU_ITEM(gcode, MSG_AUTO_HOME, PSTR("G28"));
     MENU_ITEM(gcode, MSG_DISABLE_STEPPERS, PSTR("M84"));
-    MENU_ITEM(gcode, MSG_AUTO_HOME, PSTR("G28"));
-    MENU_ITEM(function, MSG_SET_HOME_OFFSETS, lcd_set_home_offsets);
     //MENU_ITEM(gcode, MSG_SET_ORIGIN, PSTR("G92 X0 Y0 Z0"));
 #if TEMP_SENSOR_0 != 0
   #if TEMP_SENSOR_1 != 0 || TEMP_SENSOR_2 != 0 || TEMP_SENSOR_BED != 0
+	MENU_ITEM(submenu, MSG_PREHEAT_ABS, lcd_preheat_abs_menu);
     MENU_ITEM(submenu, MSG_PREHEAT_PLA, lcd_preheat_pla_menu);
-    MENU_ITEM(submenu, MSG_PREHEAT_ABS, lcd_preheat_abs_menu);
   #else
     MENU_ITEM(function, MSG_PREHEAT_PLA, lcd_preheat_pla0);
     MENU_ITEM(function, MSG_PREHEAT_ABS, lcd_preheat_abs0);
   #endif
 #endif
-    MENU_ITEM(function, MSG_COOLDOWN, lcd_cooldown);
+	MENU_ITEM(function, MSG_COOLDOWN, lcd_cooldown);
+	MENU_ITEM(function, MSG_SET_HOME_OFFSETS, lcd_set_home_offsets);
 #if PS_ON_PIN > -1
     if (powersupply)
     {
