@@ -44,7 +44,7 @@
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_ULTIMAKER
+#define MOTHERBOARD BOARD_RAMPS_13_EFB
 #endif
 
 // Define this to set a custom name for your generic Mendel,
@@ -89,7 +89,7 @@
 // 10 is 100k RS thermistor 198-961 (4.7k pullup)
 // 11 is 100k beta 3950 1% thermistor (4.7k pullup)
 // 12 is 100k 0603 SMD Vishay NTCS0603E3104FXT (4.7k pullup) (calibrated for Makibox hot bed)
-// 13 is 100k Hisens 3950  1% up to 300Â°C for hotend "Simple ONE " & "Hotend "All In ONE" 
+// 13 is 100k Hisens 3950  1% up to 300°C for hotend "Simple ONE " & "Hotend "All In ONE" 
 // 20 is the PT100 circuit found in the Ultimainboard V2.x
 // 60 is 100k Maker's Tool Works Kapton Bed Thermistor beta=3950
 //
@@ -104,10 +104,10 @@
 // 147 is Pt100 with 4k7 pullup
 // 110 is Pt100 with 1k pullup (non standard)
 
-#define TEMP_SENSOR_0 -1
-#define TEMP_SENSOR_1 -1
+#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 1
 
 // This makes temp sensor 1 a redundant sensor for sensor 0. If the temperatures difference between these sensors is to high the print will be aborted.
 //#define TEMP_SENSOR_1_AS_REDUNDANT
@@ -160,9 +160,9 @@
 
 // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 // Ultimaker
-    #define  DEFAULT_Kp 22.2
-    #define  DEFAULT_Ki 1.08
-    #define  DEFAULT_Kd 114
+    #define  DEFAULT_Kp 35.95
+    #define  DEFAULT_Ki 1.83
+    #define  DEFAULT_Kd 176.09
 
 // MakerGear
 //    #define  DEFAULT_Kp 7.0
@@ -334,11 +334,11 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
 
 // Travel limits after homing
-#define X_MAX_POS 205
+#define X_MAX_POS 177
 #define X_MIN_POS 0
-#define Y_MAX_POS 205
+#define Y_MAX_POS 185
 #define Y_MIN_POS 0
-#define Z_MAX_POS 200
+#define Z_MAX_POS 100
 #define Z_MIN_POS 0
 
 #define X_MAX_LENGTH (X_MAX_POS - X_MIN_POS)
@@ -475,16 +475,16 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 //// MOVEMENT SETTINGS
 #define NUM_AXIS 4 // The axis order in all axis related arrays is X, Y, Z, E
-#define HOMING_FEEDRATE {50*60, 50*60, 4*60, 0}  // set the homing speeds (mm/min)
+#define HOMING_FEEDRATE {50*60, 50*60, 45*60, 0}  // set the homing speeds (mm/min)
 
 // default settings
 
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {78.7402,78.7402,200.0*8/3,760*1.1}  // default steps per unit for Ultimaker
-#define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 25}    // (mm/sec)
-#define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {79.01, 80.01, 2560, 402}  // default steps per unit for Ultimaker
+#define DEFAULT_MAX_FEEDRATE          {250, 250, 3, 45}    // (mm/sec)
+#define DEFAULT_MAX_ACCELERATION      {6000,6000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  3000   // X, Y, Z and E max acceleration in mm/s^2 for retracts
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  1300   // X, Y, Z and E max acceleration in mm/s^2 for retracts
 
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
@@ -493,7 +493,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // #define EXTRUDER_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 
 // The speed change that does not require acceleration (i.e. the software might assume it can be done instantaneously)
-#define DEFAULT_XYJERK                20.0    // (mm/sec)
+#define DEFAULT_XYJERK                14.0    // (mm/sec)
 #define DEFAULT_ZJERK                 0.4     // (mm/sec)
 #define DEFAULT_EJERK                 5.0    // (mm/sec)
 
@@ -559,7 +559,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
 // ==> REMEMBER TO INSTALL U8glib to your ARDUINO library folder: http://code.google.com/p/u8glib/wiki/u8glib
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 // The RepRapWorld REPRAPWORLD_KEYPAD v1.1
 // http://reprapworld.com/?products_details&products_id=202&cPath=1591_1626

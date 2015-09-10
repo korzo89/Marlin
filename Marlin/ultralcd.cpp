@@ -102,10 +102,10 @@ static void menu_action_setting_edit_callback_long5(const char* pstr, unsigned l
 
 #if !defined(LCD_I2C_VIKI)
   #ifndef ENCODER_STEPS_PER_MENU_ITEM
-    #define ENCODER_STEPS_PER_MENU_ITEM 5
+    #define ENCODER_STEPS_PER_MENU_ITEM 1
   #endif
   #ifndef ENCODER_PULSES_PER_STEP
-    #define ENCODER_PULSES_PER_STEP 1
+    #define ENCODER_PULSES_PER_STEP 4
   #endif
 #else
   #ifndef ENCODER_STEPS_PER_MENU_ITEM
@@ -114,6 +114,10 @@ static void menu_action_setting_edit_callback_long5(const char* pstr, unsigned l
   #ifndef ENCODER_PULSES_PER_STEP
     #define ENCODER_PULSES_PER_STEP 1
   #endif
+#endif
+
+#ifndef ENCODER_DIR
+#define ENCODER_DIR		-1
 #endif
 
 
@@ -612,6 +616,7 @@ static void lcd_prepare_menu()
       MENU_ITEM(function, MSG_AUTOSTART, lcd_autostart_sd);
     #endif
 #endif
+	MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu);
     MENU_ITEM(gcode, MSG_DISABLE_STEPPERS, PSTR("M84"));
     MENU_ITEM(gcode, MSG_AUTO_HOME, PSTR("G28"));
     MENU_ITEM(function, MSG_SET_HOME_OFFSETS, lcd_set_home_offsets);
@@ -634,7 +639,7 @@ static void lcd_prepare_menu()
         MENU_ITEM(gcode, MSG_SWITCH_PS_ON, PSTR("M80"));
     }
 #endif
-    MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu);
+	MENU_ITEM(gcode, MSG_ALLOW_COLD_EXTRUSION, PSTR("M302"));
     END_MENU();
 }
 
@@ -704,11 +709,16 @@ static void lcd_move_menu_axis()
     MENU_ITEM(back, MSG_MOVE_AXIS, lcd_move_menu);
     MENU_ITEM(submenu, MSG_MOVE_X, lcd_move_x);
     MENU_ITEM(submenu, MSG_MOVE_Y, lcd_move_y);
+#if 0
     if (move_menu_scale < 10.0)
     {
         MENU_ITEM(submenu, MSG_MOVE_Z, lcd_move_z);
         MENU_ITEM(submenu, MSG_MOVE_E, lcd_move_e);
     }
+#else
+    MENU_ITEM(submenu, MSG_MOVE_Z, lcd_move_z);
+    MENU_ITEM(submenu, MSG_MOVE_E, lcd_move_e);
+#endif
     END_MENU();
 }
 
@@ -1238,7 +1248,7 @@ void lcd_update()
         if (abs(encoderDiff) >= ENCODER_PULSES_PER_STEP)
         {
             lcdDrawUpdate = 1;
-            encoderPosition += encoderDiff / ENCODER_PULSES_PER_STEP;
+            encoderPosition += ENCODER_DIR * (encoderDiff / ENCODER_PULSES_PER_STEP);
             encoderDiff = 0;
             timeoutToStatus = millis() + LCD_TIMEOUT_TO_STATUS;
         }

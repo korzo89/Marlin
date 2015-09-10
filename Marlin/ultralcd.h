@@ -24,7 +24,7 @@
   #define LCD_ALERTMESSAGEPGM(x) lcd_setalertstatuspgm(PSTR(x))
 
   #define LCD_UPDATE_INTERVAL 100
-  #define LCD_TIMEOUT_TO_STATUS 15000
+  #define LCD_TIMEOUT_TO_STATUS 60000
 
   #ifdef ULTIPANEL
   void lcd_buttons_update();
@@ -118,7 +118,6 @@ char *ftostr3(const float &x);
 char *ftostr31ns(const float &x); // float to string without sign character
 char *ftostr31(const float &x);
 char *ftostr32(const float &x);
-char *ftostr43(const float &x);
 char *ftostr12ns(const float &x); 
 char *ftostr32sp(const float &x); // remove zero-padding from ftostr32
 char *ftostr5(const float &x);
