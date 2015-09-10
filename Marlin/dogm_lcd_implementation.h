@@ -357,6 +357,8 @@ static void _drawmenu_setting_edit_generic(uint8_t row, const char* pstr, char p
   if (pgm) { lcd_printPGM(data); } else { u8g.print(data); }
 }
 
+extern char *ftostr43(const float &x);
+
 #define lcd_implementation_drawmenu_setting_edit_generic(row, pstr, pre_char, data) _drawmenu_setting_edit_generic(row, pstr, pre_char, data, false)
 #define lcd_implementation_drawmenu_setting_edit_generic_P(row, pstr, pre_char, data) _drawmenu_setting_edit_generic(row, pstr, pre_char, data, true)
 
